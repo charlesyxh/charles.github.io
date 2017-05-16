@@ -1,0 +1,64 @@
+{
+    // 项目的介绍信息
+    "info": {
+        "summary": "火炬动态",
+        "description": "如此高大上的接口文档 Powered by puer-mock"
+    },
+
+    "api": {
+        "GET /api/dynamic/list": {
+            "request": {
+                "querystring": {
+                    // 在参数名前面添加一个星号(*)标识出该参数为必传参数
+                    // 这种形式的灵感来自前端表单的必填项
+                    "id": 1 // string
+                        // "querystring2": 1, // number, 整数或者小数
+                        // "querystring3": true, // boolean
+                        // "querystring4": { "p": 1 } // object
+                }
+            },
+            "response": {
+                "status": 1,
+                "message": "ok",
+                "data": {
+                    "list|5-10": [{
+                        "id": "@id",
+                        "title": "@ctitle(10, 30)",
+                        "img": "@image(690x370')",
+                        "count|0-1000": 1,
+                        "summary|10-50": "@cword",
+                        "time": "@date('yyyy-MM-dd')",
+                        "lastTime": "@datetime"
+                    }]
+                }
+            }
+        },
+        "GET /api/dynamic": {
+            "request": {
+                "querystring": {
+                    "*id": 1
+                    // 在参数名前面添加一个星号(*)标识出该参数为必传参数
+                    // 这种形式的灵感来自前端表单的必填项
+                    //"*querystring1":"1"// string
+                    // "querystring2": 1, // number, 整数或者小数
+                    // "querystring3": true, // boolean
+                    // "querystring4": { "p": 1 } // object
+                }
+            },
+            "response": {
+                "status": 1,
+                "message": "ok",
+                "data": {
+                    "id": "@id",
+                    "title": "@ctitle(10, 30)",
+                    "img": "@image(690x370')",
+                    "count|0-1000": 1,
+                    "summary|10-50": "@cword",
+                    "content": { "id": "", "isOrderByIndex": 0, "isSupportExtStyle": 0, "apparentModel": "SIMPLE", "version": "1.0.0", "context": [{ "type": "TEXT-FRAG", "title": "", "value": "2017年5月12日博济首届生活节正式开始，来自园区的数十家企业展示他们的优秀产品和服务，吸引众多用户参与。", "style": "", "refer": "", "index": 0 }, { "type": "MEDIA-PIC", "title": "", "value": "http://statics.opark.com/file//null/0/11/198/93/5.jpg", "style": "", "refer": "", "index": 1 }, { "type": "MEDIA-PIC", "title": "", "value": "http://statics.opark.com/file//null/0/11/198/94/9.jpg", "style": "", "refer": "", "index": 2 }, { "type": "MEDIA-PIC", "title": "", "value": "http://statics.opark.com/file//null/0/11/198/95/6.jpg", "style": "", "refer": "", "index": 3 }] },
+                    "time": "@date('yyyy-MM-dd')",
+                    "lastTime": "@datetime"
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,61 @@
+{
+    // 项目的介绍信息
+    "info": {
+        "summary": "我爱看书接口文档",
+        "description": "如此高大上的接口文档 Powered by puer-mock"
+    },
+
+    "api": {
+        "GET /api/books": {
+            "response": {
+                "status": 0,
+                "message": "ok",
+                "data": {
+                    "books|5-10": [{
+                        "id": "@id",
+                        "guid": "@guid",
+                        "increment": "@increment",
+                        "title": "@ctitle(3, 5)",
+                        "author": "@cname",
+                        "progress": "@float(0, 100, 0, 2)%",
+                        "chapter": "第@cword('零一二三四五六七八九十', 1,4)章 @ctitle(3, 5)",
+                        "img": "@image('96x128')",
+                        "lastTime": "@datetime"
+                    }]
+                }
+            }
+        },
+        "GET /api/book/:id": {
+            "request": {
+                "querystring": {
+                    // 在参数名前面添加一个星号(*)标识出该参数为必传参数
+                    // 这种形式的灵感来自前端表单的必填项
+                    // "id": "1", // string
+                    // "querystring2": 1, // number, 整数或者小数
+                    // "querystring3": true, // boolean
+                    // "querystring4": { "p": 1 } // object
+                }
+            },
+            "response": {
+                "status": 0,
+                "message": "ok",
+                "data": {
+                    "book": {
+                        "id": "@id",
+                        "guid": "@guid",
+                        "increment": "@increment",
+                        "title": "@ctitle(3, 5)",
+                        "author": "@cname",
+                        "progress": "@float(0, 100, 0, 2)%",
+                        "chapter": "第@cword('零一二三四五六七八九十', 1,4)章 @ctitle(3, 5)",
+                        "img": "@image('96x128')",
+                        "lastTime": "@datetime",
+                        "type|1": ["玄幻", "武侠", "军事", "都市", "灵异", "科幻", "游戏", "仙侠"],
+                        "time": "@date('yyyy-MM-dd')",
+                        "number|0-999.0-1":1
+                    }
+                }
+            }
+        }
+    }
+}
