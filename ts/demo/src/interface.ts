@@ -19,5 +19,5 @@ class SuperMan implements HumanInterface{
 
 var spdier = new SuperMan('male',['spin','poison']);
 
-console.log(spdier.getSex());
-console.log(spdier.getPower());
+document.writeln(spdier.getSex());
+document.writeln(spdier.getPower());

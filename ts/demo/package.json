@@ -7,6 +7,7 @@
     "jquery": "^3.2.1"
   },
   "devDependencies": {
+    "@types/jquery": "^3.2.16",
     "browser-sync": "^2.18.13",
     "eslint": "^4.10.0",
     "gulp": "^3.9.1",

@@ -15,13 +15,13 @@ function add2(foo: number[]): number {
 }
 
 function test(): void {
-    a = 0;
     var a: number;//变量提升
-    alert(a);
+    a = 0;
+    document.write(a.toString());
 }
 
-console.log(add(2, 3, 4, 5, 6));
-console.log(add2([2, 3, 4, 5]));
+document.write(add(2, 3, 4, 5, 6));
+document.write(add2([2, 3, 4, 5]));
 // test();
 
 
@@ -29,7 +29,7 @@ console.log(add2([2, 3, 4, 5]));
     var name = 'charles';
     var surname = 'yu';
     var html = `<h1>${name} ${surname}</h1>`;
-    console.log(html);
+    document.write(html);
 })(this)
 
 /**
@@ -44,7 +44,7 @@ console.log(add2([2, 3, 4, 5]));
  * 好处：允许我们创建一个自定义模板字符串处理器
  */
 
-function htmlEscape(literals, ...placeholders) {
+function htmlEscape(literals: string[], ...placeholders: any[]) {
     let result = "";
     for (let i = 0; i < placeholders.length; i++) {
         result += literals[i];
@@ -67,12 +67,12 @@ function htmlEscape(literals, ...placeholders) {
  */
 //回调函数
 var callbackFn = function () {
-    console.log('callback');
+    document.write('callback');
 }
 
 //高阶函数
 function greatFn(cb: () => void) {
-    console.log('great');
+    document.write('great');
     cb();
 }
 
@@ -95,23 +95,64 @@ class User {
         this._name = val;
     }
     greet(): void {
-        alert(`Hi! My name is ${this._name}`);
+        document.write(`Hi! My name is ${this._name}`);
     }
     greetDelay(time: number): void {
         setTimeout(function () {
             //this关键字指向匿名函数
-            alert(`Hi! My name is ${this._name}`);//undefined
+            document.write(`Hi! My name is ${this._name}`);//undefined
         }, time)
         setTimeout(() => {
             //箭头函数表达式的词法会绑定this操作符，意味这箭头函数不会改变this关键字的指向
-            alert(`Hi! My name is ${this._name}`);//sandra
+            //当编译箭头函数时，Typescript编译器会生成一个this的别名，名为_this。用别名来确保this指向的是正确的对象
+            document.write(`Hi! My name is ${this._name}`);//sandra
         }, time++)
     }
 }
 
 var user = new User();
-console.log(user.get());
+document.write(user.get());
 user.set('sandra');
-console.log(user.get());
+document.write(user.get());
 user.greet();
-user.greetDelay(500);
+// user.greetDelay(500);
+
+/**
+ * 回调地狱
+ * Promise
+ */
+
+// new Promise(function (resolve: any, reject: any) {
+//     try {
+//         resolve();
+//     } catch (error) {
+//         reject(error)
+//     }
+// })
+
+/**
+ * 生成器
+ * 定义生成器的构造函数 function关键字后面跟着一个星号（*）。
+ * yield关键字被用来暂停函数执行并发挥一个值
+ * 生成器给了我们以同步的方法编写异步代码的可能性
+ * 只要我们在异步事件发生的时候调用生成器的next()方法就能做到这点
+ */
+function* generator() {
+    yield 1;
+    yield 2;
+    yield 3;
+}
+var g = new generator();
+document.write(g.next());
+
+
+/**
+ * 异步函数 async和await
+ * 异步函数是在异步操作中被调用的函数，可以使用await关键字等待异步结果的到来而不会阻塞程序的运行
+ */
+
+var p: Promise<number>;
+async function fn(): Promise<number> {
+    var i = await p;
+    return i++;
+}
